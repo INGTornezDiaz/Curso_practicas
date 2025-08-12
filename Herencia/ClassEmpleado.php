@@ -11,10 +11,10 @@ class Empleado extends Persona{
 	}
 
 	public function setpuesto(string $puesto){
-		$this->strpuesto = ´$puesto;
+		$this->strpuesto = $puesto;
 	}
 	public function getpuesto():string {
-		return $this->strpuesto = ´$puesto;
+		return $this->strpuesto = $puesto;
 	}
 
 }
