@@ -1,13 +1,17 @@
 <?php 
+//IMPORTAR EL ARCHIVO AUTOLOAD PARA FUNCION DE INSERCION
 require_once("autoload.php");
 
+//CLASSE USUARIO UTILIZANDO UNA EXTENCION AL ARCHIVO CONEXION
 class Usuario extends Conexion{
     
+    //VARIABLES DE CAMPOS DE TABLAS
     private $strNombre;
     private $intTelefono;
     private $strEmail;
     private $conexion;
 
+    //METODO CONSTRUCTOR
     public function __construct(){
     	$this->conexion = new Conexion();
         // Conexion para el metodo prepare de la linea 25
@@ -15,6 +19,7 @@ class Usuario extends Conexion{
 
     }
 
+    //METODO PARA INSERTAR USUARIOS EN LA BASE DE DATOS
     public function inserUsaurio(string $nombre, int $telefono, string $email)
     {
     	$this->strNombre = $nombre;
@@ -30,6 +35,7 @@ class Usuario extends Conexion{
 
     }
 
+    //FUNCION PARA OBTENER LOS USUARIOS Y MOSTRARLOS COMO UN ARRAY
     public function getUsario()
     {
         $sql = "SELECT * FROM usuario";
@@ -38,14 +44,15 @@ class Usuario extends Conexion{
         return $request;
     }
 
+    //FUNCION PARA ACTUALIZAR USUARIO POR MEDIO DEL ID
     public function updateUsert(int $id, string $nombre, int $telefono, string $email )
     {
         $this->strNombre = $nombre;
         $this->intTelefono = $telefono;
         $this->strEmail = $email;
         $sql = "UPDATE usuario SET nombre=?, telefono=?, email=? WHERE id=$id";//instuccion para actualizar el usario dependiendo de su id
-        $update = $this->conexion->prepare($sql);
-        $arrData = array($this->strNombre, $this->intTelefono, $this->strEmail);
+        $update = $this->conexion->prepare($sql); //METODO PREPARE FUNCIONA COMO PROTECION ANTE INYECCIONES SQL.
+        $arrData = array($this->strNombre, $this->intTelefono, $this->strEmail); //ARRAY DE LOS DATOS OBTENIDOS DE LA TABLA DE LA DB
         $resExecute = $update->execute($arrData);
         return $resExecute;
     }
@@ -54,7 +61,7 @@ class Usuario extends Conexion{
     public function getUser(int $id)
     {
         $sql = "SELECT * FROM usuario WHERE id = ?";
-        $arrWhere = array($id);
+        $arrWhere =  array($id);
         $query = $this->conexion->prepare($sql);
         $query->execute($arrWhere);
         $request = $query->fetch(PDO::FETCH_ASSOC);

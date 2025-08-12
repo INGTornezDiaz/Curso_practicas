@@ -3,6 +3,7 @@ require_once("autoload.php");
 
 $objUsuario = new Usuario();
 
+//FUNCION PARA AGREGAR USUARIOS
 //$insert = $objUsuario->inserUsaurio("Apolinar",7451368244,"apolinarronez@gmail.com");
 //echo $insert;
 
@@ -22,4 +23,4 @@ print_r("</pre>");
 
 $delete = $objUsuario->deluser(2);
 echo $delete;
-?>  
+?>	  	 
