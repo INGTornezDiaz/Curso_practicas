@@ -22,7 +22,6 @@ class Conexion{
 			//establecemos el modo de error a excepciones
 			//esto nos permite capturar errores de conexion
 			$this->conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			echo "Conexion exitosa";
 		//capturamos el error de conexion
 		} catch(Exception $e){
 			$this->conect = "Error de conexion";
@@ -31,8 +30,15 @@ class Conexion{
 		}
 
 	}
-} 
+
+//Función para el metodo prepare de PDO 
+public function conect()
+{
+	return $this->conect;
+}
 // Creamos una instancia de la clase Conexion
 // Esto nos permite establecer la conexion a la base de datos
-$conect = new Conexion();
+//$conect = new Conexion();
+
+} 
 ?>
